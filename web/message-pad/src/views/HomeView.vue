@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-11-03 00:24:14
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-03 22:45:59
+ * @LastEditTime: 2022-11-04 00:19:38
  * @FilePath: \src\views\HomeView.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -25,48 +25,60 @@
       </ul>
     </div>
     <!-- 内容 -->
-    <div class="main">
-      <!--便签 -->
+    <!--便签 -->
+    <tagVue></tagVue>
+    <!-- 提交 -->
+    <div class="post">
+      <div class="post_nav">
+        <div>这里是头部</div>
+        <span>x</span>
+      </div>
+      <!-- 内容 -->
       <div
         class="main_tag"
-        v-for="i in list"
-        :key="i._id"
         :style="{ 'background-color': back[Math.floor(Math.random() * 10)] }"
       >
         <!-- 标头 -->
         <nav class="main_tag_nav">
-          <span>{{ i.date | dateMag() }}</span>
+          <span>{{}}</span>
           <span>留言</span>
         </nav>
         <main class="main_tag_main">
-          <p>{{ i.body }}</p>
+          <p>{{}}</p>
         </main>
         <footer class="main_tag-footer">
           <div>
-            <span>{{ i.like }}</span>
+            <span>{{}}</span>
             <span>评论</span>
           </div>
-          <p>{{ i.username }}</p>
+          <p>{{}}</p>
         </footer>
       </div>
+      <!-- 提交 -->
+      <div>
+        <input type="text" name="" id="" />
+        <input type="text" name="" id="" />
+        <button></button>
+      </div>
+      <!-- 评论 -->
+      <div></div>
     </div>
-
+    <!-- 详情 -->
     <div></div>
+    <!-- 按钮 -->
+    <div class="but"><span>+</span></div>
   </div>
 </template>
 
 <script>
-import { getly } from "../axios/api.js";
+import tagVue from "@/components/tag.vue";
 export default {
   name: "HelloWorld",
-  // inject: [axiso],
   props: {
     msg: String,
   },
   data() {
     return {
-      list: [],
-      // 随机颜色
       back: [
         "rgb(238,215,211)",
         "rgb(228,249,219)",
@@ -80,28 +92,8 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.getlys();
-  },
-  methods: {
-    async getlys() {
-      const res = await getly();
-      this.list = res.data;
-    },
-  },
-  filters: {
-    // 格式化时间
-    dateMag: function (res) {
-      // 比如需要这样的格式 yyyy-MM-dd
-      let date = new Date(res);
-      let Y = date.getFullYear() + "-";
-      let M =
-        (date.getMonth() + 1 < 10
-          ? "0" + (date.getMonth() + 1)
-          : date.getMonth() + 1) + "-";
-      let D = date.getDate() + " ";
-      return Y + M + D;
-    },
+  components: {
+    tagVue,
   },
 };
 </script>
@@ -109,7 +101,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .con {
-  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -135,10 +126,22 @@ export default {
       }
     }
   }
-  .main {
-    display: flex;
-    width: 85%;
-    flex-wrap: wrap;
+  .post {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    box-shadow: -2px -5px 10px #7e7e7e;
+    background-color: white;
+    z-index: 50;
+    .post_nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      span {
+        font-size: 25px;
+      }
+    }
     .main_tag {
       width: 288px;
       height: 240px;
@@ -166,6 +169,19 @@ export default {
         }
       }
     }
+  }
+  .but {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    font-size: 50px;
+    line-height: 44px;
+    text-align: center;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
   }
 }
 </style>
