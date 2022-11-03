@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-11-02 13:17:09
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-02 16:26:59
+ * @LastEditTime: 2022-11-03 22:20:49
  * @FilePath: \db\model\ly.js
  * @Description: 留言的模型
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -17,7 +17,7 @@ const Ly = new Schema({
   body: String,
   date: {
     default: Date.now(),
-    type: Date,
+    type: Number,
   },
   like: {
     type: Number,

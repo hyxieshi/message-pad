@@ -16,7 +16,7 @@ const pl = new Schema({
   body: String,
   date: {
     default: Date.now(),
-    type: Date,
+    type: Number,
   },
 });
 
