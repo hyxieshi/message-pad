@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-11-02 12:30:58
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-02 16:26:22
+ * @LastEditTime: 2022-11-04 20:12:55
  * @FilePath: \api\index.js
  * @Description:接口
  * Copyright 2022 OBKoro1, All Rights Reserved.
@@ -31,10 +31,15 @@ router.get("/get_Ly", async (ctx) => {
   ctx.status = 200;
   ctx.body = await ly.find();
 });
+// 获取单独留言
+router.get("/get_onely", async (ctx) => {
+  ctx.status = 200;
+  ctx.body = await ly.findById(ctx.query.ly_id);
+});
 // 获取留言对应的评论
 // 参数：ly_id
 router.get("/get_Lypl", async (ctx) => {
-  console.log(ctx.query.ly_id);
+  // console.log(ctx.query.ly_id);
   ctx.status = 200;
   ctx.body = await Pl.find({ ly_id: ctx.query.ly_id });
 });
@@ -59,6 +64,7 @@ router.post("/post_Ly", async (ctx) => {
     ly_id,username,body
 */
 router.post("/post_Lypl", async (ctx) => {
+  console.log(ctx.request.body);
   await Pl.create({
     ly_id: ctx.request.body.ly_id,
     username: ctx.request.body.username,

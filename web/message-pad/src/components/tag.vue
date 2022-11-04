@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-11-03 23:35:08
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-04 00:09:02
+ * @LastEditTime: 2022-11-04 20:47:49
  * @FilePath: \src\components\tag.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -15,7 +15,7 @@
       v-for="i in list"
       :key="i._id"
       :style="{ 'background-color': back[Math.floor(Math.random() * 10)] }"
-      @click=""
+      @click="details(i._id)"
     >
       <!-- 标头 -->
       <nav class="main_tag_nav">
@@ -38,6 +38,7 @@
 
 <script>
 import { getly } from "../axios/api.js";
+import store from "@/store/index.js";
 export default {
   data() {
     return {
@@ -64,19 +65,10 @@ export default {
       const res = await getly();
       this.list = res.data;
     },
-  },
-  filters: {
-    // 格式化时间
-    dateMag: function (res) {
-      // 比如需要这样的格式 yyyy-MM-dd
-      let date = new Date(res);
-      let Y = date.getFullYear() + "-";
-      let M =
-        (date.getMonth() + 1 < 10
-          ? "0" + (date.getMonth() + 1)
-          : date.getMonth() + 1) + "-";
-      let D = date.getDate() + " ";
-      return Y + M + D;
+    details(id) {
+      // store.state.id = id;
+      // store.state.showBq = 1;
+      this.$emit("details", id);
     },
   },
 };
