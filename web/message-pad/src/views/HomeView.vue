@@ -2,7 +2,7 @@
  * @Author: SunBOY
  * @Date: 2022-11-03 00:24:14
  * @LastEditors: SunBOY
- * @LastEditTime: 2022-11-04 20:51:48
+ * @LastEditTime: 2022-11-04 22:57:49
  * @FilePath: \src\views\HomeView.vue
  * @Description: 
  * Copyright 2022 OBKoro1, All Rights Reserved. 
@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     // 获取评论
-    getComment: async function () {
+    async getComment() {
       const config = {
         ly_id: this.id,
         username: this.name,
@@ -145,7 +145,8 @@ export default {
         await postComment(config);
         this.name = "";
         this.body = "";
-        await getComment();
+        // 没有这个方法啊
+        await this.getComment();
       }
     },
   },
